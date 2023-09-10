@@ -1,15 +1,26 @@
-import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
-const History = ({ data }) => {
+export default function History() {
+  useEffect(() => {
+    setLastData();
+  }, [sign, result]);
+  const setLastData = () => {
+    if (sign !== "") {
+      setData([...data, { text1, sign, text2, result }]);
+    }
+    setSign("");
+  };
   return (
-    <View>
-      <Text>Calculation History:</Text>
-      {data.map((item, index) => (
-        <Text key={index}>{`${item.text1} ${item.sign} ${item.text2} = ${item.result}`}</Text>
-      ))}
+    <View style={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <Text>{`${item.text1} ${item.sign} ${item.text2} = ${item.result}`}</Text>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
+
+      <StatusBar style="auto" />
     </View>
   );
-};
-
-export default History;
+}
