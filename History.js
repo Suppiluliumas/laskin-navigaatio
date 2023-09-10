@@ -1,15 +1,17 @@
-import { View } from "react-native";
-
-export default function History() {
-  useEffect(() => {
-    setLastData();
-  }, [sign, result]);
-  const setLastData = () => {
-    if (sign !== "") {
-      setData([...data, { text1, sign, text2, result }]);
-    }
-    setSign("");
-  };
+import { StyleSheet, View } from "react-native";
+import { FlatList } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Text } from "react-native";
+export default function History({ route }) {
+  const { data } = route.params;
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  });
   return (
     <View style={styles.container}>
       <FlatList
